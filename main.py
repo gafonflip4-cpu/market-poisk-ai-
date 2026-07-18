@@ -5,7 +5,7 @@ from flask import Flask, request
 TOKEN = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
- 
+
 @bot.message_handler(commands=['start'])
 def start_message(message):
     bot.reply_to(message, "Привет! Я бот для поиска товаров на маркетплейсах.")
@@ -22,5 +22,7 @@ def webhook():
     return 'ok', 200
 
 if __name__ == '__main__':
+    bot.remove_webhook()
+    bot.set_webhook(url=f"https://market-poisk-ai.onrender.com/{TOKEN}")
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
