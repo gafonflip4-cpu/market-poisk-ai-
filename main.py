@@ -5,7 +5,7 @@ from flask import Flask, request
 TOKEN = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
-
+ 
 @bot.message_handler(commands=['start'])
 def start_message(message):
     bot.reply_to(message, "Привет! Я бот для поиска товаров на маркетплейсах.")
